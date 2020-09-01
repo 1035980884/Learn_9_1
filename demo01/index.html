@@ -5,10 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="js/vue.js"></script>
+    <script src="js/jquery-3.4.1.js"></script>
 </head>
+<style>
+    .class1 {
+        background-color: aqua;
+        background: #000;
+        color: rgb(51, 77, 194);
+    }
+</style>
 
 <body>
+    <div id="app">
+        <h1>{{msg}}</h1><br>
+        <h2>1+2={{sum()}}</h2>
+        <!-- 此处显示user实时输入 -->
+        <h4>用户名：{{user}} <br> 密码:{{pwd}}</h4>
+        请输入用户名：<input v-model="user">
+    </div>
+    <div id="t1">
+        <br> 请输入密码：
+        <input type="password" v-model="pwd" id="pwd">
+        <!-- v-bind指令修改标签样式 -->
+        <label for="r1">修改颜色</label><input type="checkbox" v-model="flag" id="r1">
+        <div v-bind:class="{'class1':flag}">
+            奥术大师多
+        </div>
+        <!-- 此处插入table代码 -->
+        <div v-html="t1"></div>
+    </div>
+    <script>
+        // 标签利用VUE指令：v- html 插入HTML代码
+        var b = new Vue({
+                el: "#t1",
+                data: {
+                    t1: '<table><tr><td>用户名:</td><td><input ></td></tr><tr><td>密码：</td><td><input ></td></tr></table>',
+                    // 标记是否启用样式
+                    flag: false
+                }
+            })
+            // 标签插入文本，文本框即输即显
+        var a = new Vue({
 
+            el: '#app',
+            data: {
+                msg: "Hello,VUE",
+                user: "joker",
+
+            },
+            // 直接调用方法结果
+            methods: {
+                sum: function() {
+                    return 1 + 2;
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>
